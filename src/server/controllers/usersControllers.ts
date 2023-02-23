@@ -2,7 +2,7 @@ import "../../loadEnvironment.js";
 import { type NextFunction, type Request, type Response } from "express";
 import { CustomError } from "../../CustomError/CustomError.js";
 import User from "../../database/models/User.js";
-import { type UserCredentials } from "../../types";
+import { type UserCredentials } from "../../types.js";
 import jwt from "jsonwebtoken";
 import bcryptjs from "bcryptjs";
 
