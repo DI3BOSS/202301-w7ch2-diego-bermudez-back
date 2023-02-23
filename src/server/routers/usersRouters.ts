@@ -1,8 +1,22 @@
+import multer from "multer";
 import { Router } from "express";
-import loginUser from "../controllers/usersControllers.js";
+import { loginUser, createUser } from "../controllers/usersControllers.js";
+import { v4 as uuidv4 } from "uuid";
 
-const usersRouter = Router();
+export const usersRouter = Router();
+
+const fileNamePrefix = uuidv4;
+
+const storage = multer.diskStorage({
+  destination(req, file, callback) {
+    callback(null, "uploads/");
+  },
+  filename(req, file, callback) {
+    callback(null, `${fileNamePrefix()}-${file.originalname}`);
+  },
+});
+
+const upload = multer({ storage });
 
 usersRouter.post("/login", loginUser);
-
-export default usersRouter;
+usersRouter.post("/register", upload.single("avatar"), createUser);
