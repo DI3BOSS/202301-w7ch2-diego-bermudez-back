@@ -62,7 +62,6 @@ export const deleteRobotById = async (
       500,
       "Couldn't find and delete the robot"
     );
-
     next(customError);
   }
 };
